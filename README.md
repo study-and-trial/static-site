@@ -19,3 +19,18 @@
 `pnpm create vite my-app --template react-ts`
 
 ref: [npm create-vite](https://www.npmjs.com/package/create-vite)
+
+## 2. Continuous Deployment
+
+> 순서도
+>
+> 1. 개발 진행
+> 2. github push 또는 pr merge에 따라 runner 실행(적절한 방식을 runner의 트리거로 설정한다.)
+> 3. runner server(github 또는 self-hosted)에서 runner 실행
+>    - container (image)registry 로그인
+>    - 컨테이너 이미지 빌드, 레지스트리에 push
+>    - 배포서버에 ssh 접속하여 이미지 pull, 컨테이너 재시작
+
+self-hosted로 선택한 이유는 뭐 비용이나 자유롭고싶은 마음(?)도 있지만, 배포 서버의 ssh 접속을 루트를 최소화
+하기 위한 것이다. 물론 깃허브에 무슨 일이 벌어지겠냐마는, 위험한 일은 정해진 시스템에 모두 일임하는게
+단순해서 좋다.
